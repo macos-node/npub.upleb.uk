@@ -114,7 +114,7 @@ function useUserProfile(pubkey: string | null) {
   useEffect(() => {
     if (!pubkey) { setProfile(null); return; }
     setProfile(null);
-    const relays = ['wss://relay.fizx.uk', 'wss://nos.lol'];
+    const relays = ['wss://relay.nfunc.xyz', 'wss://nos.lol'];
     const sockets: WebSocket[] = [];
     let latestTs = 0;
     relays.forEach(url => {
@@ -296,7 +296,7 @@ export default function Index() {
     const collectedNotes: NostrNote[] = [];
     const connectAt = Date.now();
 
-    const ws = new WebSocket('wss://relay.fizx.uk');
+    const ws = new WebSocket('wss://relay.nfunc.xyz');
     wsRef.current = ws;
 
     const connectTimeout = setTimeout(() => {
@@ -304,7 +304,7 @@ export default function Index() {
         ws.close();
         if (!doneRef.current) {
           setRelayError(true);
-          setRelayDetail('Timed out connecting to relay.fizx.uk');
+          setRelayDetail('Timed out connecting to relay.nfunc.xyz');
           setLookupState('error');
         }
       }
@@ -455,7 +455,7 @@ export default function Index() {
             </div>
             <div className="hidden sm:block shrink-0">
               <RelayStats
-                urls={['wss://relay.fizx.uk', 'wss://git.upleb.uk']}
+                urls={['wss://relay.nfunc.xyz', 'wss://git.upleb.uk']}
                 filter={{ kinds: [0], limit: 50 }}
                 writable={false}
               />
@@ -496,7 +496,7 @@ export default function Index() {
           <div className="flex items-center gap-2 mt-2 flex-wrap">
             <p className="text-[10px] font-mono text-muted-foreground/40">
               Queries{' '}
-              <a href="https://relay.fizx.uk" className="hover:text-primary transition-colors">relay.fizx.uk</a>
+              <a href="https://relay.nfunc.xyz" className="hover:text-primary transition-colors">relay.nfunc.xyz</a>
               {' '}for kind:0 and kind:1 events
             </p>
             {relayDetail && (
@@ -515,7 +515,7 @@ export default function Index() {
           <section>
             <h2 className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-3">Profile</h2>
             <div className="bg-card border border-border p-6 space-y-3">
-              <p className="text-xs font-mono text-red-400/80">{relayDetail || 'Could not connect to relay.fizx.uk'}</p>
+              <p className="text-xs font-mono text-red-400/80">{relayDetail || 'Could not connect to relay.nfunc.xyz'}</p>
               <button
                 onClick={() => { const hex = npubToHex(query); if (hex) doLookup(hex); }}
                 className="font-mono text-[10px] px-3 py-1.5 border border-border text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors"
@@ -571,7 +571,7 @@ export default function Index() {
               <ProfileSkeleton />
             ) : (
               <div className="bg-card border border-border p-5">
-                <p className="text-xs font-mono text-muted-foreground/40">No kind:0 profile found on relay.fizx.uk for this pubkey</p>
+                <p className="text-xs font-mono text-muted-foreground/40">No kind:0 profile found on relay.nfunc.xyz for this pubkey</p>
               </div>
             )}
 
@@ -593,7 +593,7 @@ export default function Index() {
               </div>
             ) : (profile || noEvents) ? (
               <div className="bg-card border-x border-b border-border px-5 py-3">
-                <p className="text-[10px] font-mono text-muted-foreground/40">No kind:1 notes found on relay.fizx.uk</p>
+                <p className="text-[10px] font-mono text-muted-foreground/40">No kind:1 notes found on relay.nfunc.xyz</p>
               </div>
             ) : null}
           </section>
